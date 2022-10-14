@@ -1,0 +1,26 @@
+pipeline {
+    agent {label '.net'}
+    stages {
+        stage ('vcs') {
+            steps {
+                git url: 'https://github.com/gautamshrinivas/dotnetcore-docs-hello-world.git',
+                branch: 'SPRINT_CORE'
+            }
+        }
+        stage ('build') {
+            steps {
+                sh 'dotnet build dotnetcoresample.csproj'
+            }
+        }
+        stage ('publish') {
+            steps {
+                sh 'dotnet publish dotnetcoresample.csproj'
+            }
+        }
+        stage ('package') {
+            steps {
+                sh 'zip -r dotnetcore-docs-hello-world-1.0.0.zip /home/dotnet/dotnetcore-docs-hello-world/bin/Debug/net6.0/publish'
+            }
+        }
+    }
+}
