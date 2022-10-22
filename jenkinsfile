@@ -1,5 +1,5 @@
 pipeline {
-    agent {label '.net'}
+    agent {label 'node'}
     stages {
         stage ('vcs') {
             steps {
